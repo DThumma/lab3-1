@@ -136,7 +136,21 @@ object Lab3 extends jsy.util.JsyApplication {
       case Binary(Times, e1, e2) => N(eToN(e1) * eToN(e2))
       case Binary(Div, e1, e2) => N(eToN(e1) / eToN(e2))
       
-      case Binary(bop @ (Eq | Ne), e1, e2) => throw new UnsupportedOperationException
+      case Binary(Eq, e1, e2) => e1 match{
+        case Function(x, y, z) => throw new DynamicTypeError(e)
+		case _ => e2 match{
+		  case Function(x, y, z) => throw new DynamicTypeError(e)
+		  case _ => B(eToVal(e1) == eToVal(e2))
+		}	
+      }
+      
+      case Binary(Ne, e1, e2) => e1 match{
+        case Function(x, y, z) => throw new DynamicTypeError(e)
+		case _ => e2 match{
+		  case Function(x, y, z) => throw new DynamicTypeError(e)
+		  case _ => B(eToVal(e1) != eToVal(e2))
+		}	
+      }
       case Binary(bop @ (Lt|Le|Gt|Ge), e1, e2) => B(inequalityVal(bop, eToVal(e1), eToVal(e2)))
       
       case Binary(And, e1, e2) => 
@@ -154,10 +168,12 @@ object Lab3 extends jsy.util.JsyApplication {
       //
        case Call(e1, e2) =>  {
 	  val v1 = eval(env, e1) 
+	  println("BUTTS" + v1);
 		v1 match{
 		  	//case Function(Some(p),x,e3) => eval(extend(env, x, eToVal(e2)), e3)
-			case Function(Some(p),x,e3) => eval(extend(extend(env, p, e1), x, eToVal(e2)), e3)
-			case Function(None,x,e3) => eval(extend(env, x, eToVal(e2)), e3)
+	    	case Function(None,x,e3) => eval(extend(env, x, eval(env, e2)), e3)
+			case Function(Some(p),x,e3) => eval(extend(extend(env, p, v1), x, eval(env, e2)), e3)
+			
 			case _ => throw new DynamicTypeError(e)
 		}
 	  }
@@ -181,25 +197,33 @@ object Lab3 extends jsy.util.JsyApplication {
     require(isValue(v))
     /* Simple helper that calls substitute on an expression
      * with the input value v and variable name x. */
-    def subst(e: Expr): Expr = substitute(e, v, x)
+    
     /* Body */
     e match {
       case N(_) | B(_) | Undefined | S(_) => e
       //if e is a function and contains the string x, return it
       //otherwise substitute into the function
-      case Function(p, s, e1) => if((x == p) || (x ==s)) return e else return Function(p,s, subst(e1))
-      case Binary(op, e1, e2) => return Binary(op, e1, e2)
-      case Unary(op, e1) => return Unary(op, subst(e1))
-      case Call(e1, e2) => return Call(subst(e1), subst(e2))
-      case If(e1, e2, e3) => return If(subst(e1), subst(e2), subst(e3))
-      case Print(e1) => Print(subst(e1))
+      case Function(p, s, e1) => if((x == p) || (x ==s)) return e else return Function(p,s, substitute(e1, v, x))
+      case Binary(op, e1, e2) => op match{
+        case (Eq|Ne) => e1 match {
+          case Function(x,y,z) => throw new DynamicTypeError(e)
+          case _ => return Binary(op, substitute(e1, v,  x), substitute(e2, v ,x)); //
+        }
+        case _ => return Binary(op, substitute(e1, v,  x), substitute(e2, v ,x)); //
+      }
+      case Unary(op, e1) => return Unary(op, substitute(e1,v,x))
+      case Call(e1, e2) => return Call(substitute(e1, v,  x), substitute(e2, v ,x))
+      case If(e1, e2, e3) => return If(substitute(e1, v, x), substitute(e2, v ,x), substitute(e3, v ,x))
+      case Print(e1) => Print(substitute(e1, v ,x))
       case Var(t) => if(t == x) return v else e
-      case ConstDecl(t, e1, e2) => if(t == x) return ConstDecl(t, v, subst(e2)) else return ConstDecl(t, subst(e1), subst(e2))
-      case _ => subst(e)
+      case ConstDecl(y,e1, e2) => ConstDecl(y, substitute(e1, v, x), if (x == y) e2 else substitute(e2, v, x))
+      //case ConstDecl(t, e1, e2) => if(t == x) return ConstDecl(t, v, substitute(e2, v ,x)) else return ConstDecl(t, substitute(e1, v ,x), substitute(e2, v ,x))
+      case _ => throw new UnsupportedOperationException
     }
   }
     
   def step(e: Expr): Expr = {
+    println("XXX"+e+"XXX")
     e match {
       /* Base Cases: Do Rules */
       case Print(e1) if isValue(e1) => println(pretty(e1)); Undefined
@@ -231,7 +255,14 @@ object Lab3 extends jsy.util.JsyApplication {
 			//case (e1, S(v2)) => return B( toNumber(e1) == toNumber(e2) ) //inequalitynumer2
 			case (_,_) => return B( e1 == e2 )
 		}
-		case Ne => B( e1 != e2 )
+		case Ne => (e1, e2) match {
+			case (Function(x, y, z), e2) => throw new DynamicTypeError(e)
+			case (e1, Function(x, y, z)) => throw new DynamicTypeError(e)
+			//case (S(v1), e2) => return B( toNumber(e1) == toNumber(e2) ) //inequalitynumber1
+			//case (e1, S(v2)) => return B( toNumber(e1) == toNumber(e2) ) //inequalitynumer2
+			case (_,_) => return B( e1 != e2 )
+		}
+
 		case Lt => (e1, e2) match { // >
 			case(S(s1),e2) => B( toNumber(e1) < toNumber(e2) )
 			case(e1, S(s2)) => B( toNumber(e1) < toNumber(e2) )
@@ -258,17 +289,20 @@ object Lab3 extends jsy.util.JsyApplication {
 			case (_,_) => B( toNumber(e1) >= toNumber(e2) )
 			}
 		//if first argument true return second argument else return false
-		case And => if (toBoolean(e1)) return e2 else return B(false)
+		case And if (isValue(e1)) => if (toBoolean(e1)) return e2 else return B(false)
 		//if first argument true return true else return second argument
-		case Or => if (toBoolean(e1)) return B(true) else return e2
+		case Or if (isValue(e1)) => if (toBoolean(e1)) return B(true) else return e2
 	  }
 	  
 	  case If(e1, e2, e3) if (isValue(e1)) => if (toBoolean(e1)) return e2 else return e3
 	  case ConstDecl(x, e1, e2) if (isValue(e1)) => return substitute(e2, e1, x)
-      case Call(e1, e2) =>  e1 match {
+      case Call(e1, e2) => { 
+        if (!(isValue(e1) && isValue(e2))) throw new DynamicTypeError(e)
+        else e1 match {
         case Function(Some(p), x, e3 ) => return substitute(substitute(e3, e1, p),e2,x);
         case Function(None, x, e3 ) => return substitute(e3, e2, x)
         case _ => throw new DynamicTypeError(e);
+        }
       }
       
       
