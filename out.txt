@@ -472,3 +472,457 @@ XXXIf(Binary(Eq,N(3.0),N(0.0)),N(1.0),Binary(Times,N(3.0),Call(Function(Some(f),
 [36mTests: succeeded 9, failed 4, canceled 0, ignored 0, pending 0[0m
 [31m*** 4 TESTS FAILED ***[0m
 [0m[[32msuccess[0m] [0mTotal time: 10 s, completed Feb 20, 2014 10:18:44 AM[0m
+Loading /usr/share/sbt/bin/sbt-launch-lib.bash
+[0m[[0minfo[0m] [0mLoading project definition from /home/samuel/Documents/pl/CSCI-3155/lab3/project[0m
+[0m[[0minfo[0m] [0mSet current project to lab3 (in build file:/home/samuel/Documents/pl/CSCI-3155/lab3/)[0m
+[0m[[0minfo[0m] [0mSet current project to lab3-grader (in build file:/home/samuel/Documents/pl/CSCI-3155/lab3/)[0m
+[0m[[0minfo[0m] [0mCompiling 1 Scala source to /home/samuel/Documents/pl/CSCI-3155/lab3/target/scala-2.10/classes...[0m
+[0m[[33mwarn[0m] [0m/home/samuel/Documents/pl/CSCI-3155/lab3/src/main/scala/Lab3.scala:269: unreachable code[0m
+[0m[[33mwarn[0m] [0m			case(S(s1), S(s2)) => B( s1 < s2 )[0m
+[0m[[33mwarn[0m] [0m			                       ^[0m
+[0m[[33mwarn[0m] [0m/home/samuel/Documents/pl/CSCI-3155/lab3/src/main/scala/Lab3.scala:275: unreachable code[0m
+[0m[[33mwarn[0m] [0m			case(S(s1), S(s2)) => B( s1 > s2 )[0m
+[0m[[33mwarn[0m] [0m			                       ^[0m
+[0m[[33mwarn[0m] [0m/home/samuel/Documents/pl/CSCI-3155/lab3/src/main/scala/Lab3.scala:281: unreachable code[0m
+[0m[[33mwarn[0m] [0m			case(S(s1), S(s2)) => B( s1 <= s2 )[0m
+[0m[[33mwarn[0m] [0m			                       ^[0m
+[0m[[33mwarn[0m] [0m/home/samuel/Documents/pl/CSCI-3155/lab3/src/main/scala/Lab3.scala:288: unreachable code[0m
+[0m[[33mwarn[0m] [0m			case(S(s1), S(s2)) => B( s1 >= s2 )[0m
+[0m[[33mwarn[0m] [0m			                       ^[0m
+[0m[[33mwarn[0m] [0mfour warnings found[0m
+[0m[[0minfo[0m] [0mRunning Lab3Grader [0m
+[36mRun starting. Expected test count is: 13[0m
+[32mLab3Grading:[0m
+[32meval/fun-equality[0m
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Binary(Eq,Function(None,x,N(0.0)),N(0.0))
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Binary(Eq,N(0.0),Function(None,x,N(0.0)))
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Binary(Ne,Function(None,x,N(0.0)),N(0.0))
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Binary(Ne,N(0.0),Function(None,x,N(0.0)))
+[32m- should yield a dynamic type error[0m
+[32meval/call-non-fun[0m
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Call(N(3.0),N(4.0))
+BUTTSN(3.0)
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Call(N(3.0),B(true))
+BUTTSN(3.0)
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Call(Binary(Minus,Binary(Plus,Binary(Plus,N(10.0),N(4.0)),N(7.0)),Binary(Times,B(true),N(3.0))),B(true))
+BUTTSN(18.0)
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Call(Call(Function(None,x,N(0.0)),N(10.0)),B(true))
+BUTTSFunction(None,x,N(0.0))
+BUTTSN(0.0)
+[32m- should yield a dynamic type error[0m
+[32meval/arithmetic-conversions[0m
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Binary(Lt,Function(None,x,N(0.0)),Undefined)
+Value: B(false)
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Binary(Lt,N(30.0),S(4))
+Value: B(false)
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Binary(Gt,S(30),N(4.0))
+Value: B(true)
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Binary(Gt,N(30.0),Undefined)
+Value: B(false)
+[32m- should evaluate JavaScripty arithmetic expressions according to the lab spec[0m
+[32meval/simple-programs[0m
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  ConstDecl(w,Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Call(Var(w),N(3.0)))
+BUTTSFunction(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0))))))
+BUTTSFunction(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0))))))
+BUTTSFunction(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0))))))
+BUTTSFunction(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0))))))
+Value: N(6.1)
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  ConstDecl(x,N(1.0),ConstDecl(g,Function(None,y,Var(x)),ConstDecl(h,Function(None,x,Call(Var(g),N(2.0))),Call(Var(h),N(3.0)))))
+BUTTSFunction(None,x,Call(Var(g),N(2.0)))
+BUTTSFunction(None,y,Var(x))
+Value: N(3.0)
+[32m- should evaluate JavaScripty programs according to the lab spec[0m
+[32meval/scoping[0m
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  ConstDecl(g,Function(None,x,Function(None,y,Binary(And,Var(x),Var(y)))),Binary(Plus,Call(Call(Var(g),N(1.0)),N(0.0)),N(0.1)))
+BUTTSFunction(None,x,Function(None,y,Binary(And,Var(x),Var(y))))
+BUTTSFunction(None,y,Binary(And,Var(x),Var(y)))
+[32m- should evaluate JavaScripty programs according to the lab spec[0m
+[32meval/recursive-programs[0m
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  ConstDecl(factorial,Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Call(Var(factorial),N(4.0)))
+BUTTSFunction(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0))))))
+BUTTSFunction(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0))))))
+BUTTSFunction(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0))))))
+BUTTSFunction(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0))))))
+BUTTSFunction(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0))))))
+Value: N(24.0)
+[32m- should evaluate recursive JavaScripty programs according to the lab spec[0m
+[32msubstitute/no-shadow[0m
+[32m- should substitute a value for uses of a variable[0m
+[32msubstitute/shadow[0m
+XXXUnary(Neg,Unary(Neg,N(1.0)))XXX
+XXXUnary(Neg,N(1.0))XXX
+[31m- should substitute a value for uses of a variable *** FAILED ***[0m
+[31m  Expected Function(Some(x),y,Binary(Plus,Var(x),Var(y))), but got Function(Some(x),y,Binary(Plus,N(3.0),Var(y))) (Lab3Grading.scala:116)[0m
+[32mstep[0m
+XXXUnary(Not,N(3.0))XXX
+XXXBinary(Seq,N(1.0),Binary(Plus,N(3.0),N(4.0)))XXX
+XXXBinary(Plus,N(3.0),N(4.0))XXX
+[31m- should perform one step of evaluation according to the lab spec *** FAILED ***[0m
+[31m  Expected Binary(Plus,N(3.0),N(4.0)), but got Binary(Seq,N(1.0),N(7.0)) (Lab3Grading.scala:15)[0m
+[32mstep/fun-equality[0m
+------------------------------------------------------------
+Evaluating with step ...
+Step 0: Binary(Eq,Function(None,x,N(0.0)),N(0.0))
+XXXBinary(Eq,Function(None,x,N(0.0)),N(0.0))XXX
+------------------------------------------------------------
+Evaluating with step ...
+Step 0: Binary(Eq,N(0.0),Function(None,x,N(0.0)))
+XXXBinary(Eq,N(0.0),Function(None,x,N(0.0)))XXX
+------------------------------------------------------------
+Evaluating with step ...
+Step 0: Binary(Ne,Function(None,x,N(0.0)),N(0.0))
+XXXBinary(Ne,Function(None,x,N(0.0)),N(0.0))XXX
+------------------------------------------------------------
+Evaluating with step ...
+Step 0: Binary(Ne,N(0.0),Function(None,x,N(0.0)))
+XXXBinary(Ne,N(0.0),Function(None,x,N(0.0)))XXX
+[32m- should yield a dynamic type error[0m
+[32mstep/call-non-fun[0m
+------------------------------------------------------------
+Evaluating with step ...
+Step 0: Call(N(3.0),N(4.0))
+XXXCall(N(3.0),N(4.0))XXX
+------------------------------------------------------------
+Evaluating with step ...
+Step 0: Call(N(3.0),B(true))
+XXXCall(N(3.0),B(true))XXX
+------------------------------------------------------------
+Evaluating with step ...
+Step 0: Call(Binary(Minus,Binary(Plus,Binary(Plus,N(10.0),N(4.0)),N(7.0)),Binary(Times,B(true),N(3.0))),B(true))
+XXXCall(Binary(Minus,Binary(Plus,Binary(Plus,N(10.0),N(4.0)),N(7.0)),Binary(Times,B(true),N(3.0))),B(true))XXX
+XXXBinary(Minus,Binary(Plus,Binary(Plus,N(10.0),N(4.0)),N(7.0)),Binary(Times,B(true),N(3.0)))XXX
+XXXBinary(Plus,Binary(Plus,N(10.0),N(4.0)),N(7.0))XXX
+XXXBinary(Plus,N(10.0),N(4.0))XXX
+Step 1: Call(Binary(Minus,Binary(Plus,N(14.0),N(7.0)),Binary(Times,B(true),N(3.0))),B(true))
+XXXCall(Binary(Minus,Binary(Plus,N(14.0),N(7.0)),Binary(Times,B(true),N(3.0))),B(true))XXX
+XXXBinary(Minus,Binary(Plus,N(14.0),N(7.0)),Binary(Times,B(true),N(3.0)))XXX
+XXXBinary(Plus,N(14.0),N(7.0))XXX
+Step 2: Call(Binary(Minus,N(21.0),Binary(Times,B(true),N(3.0))),B(true))
+XXXCall(Binary(Minus,N(21.0),Binary(Times,B(true),N(3.0))),B(true))XXX
+XXXBinary(Minus,N(21.0),Binary(Times,B(true),N(3.0)))XXX
+XXXBinary(Times,B(true),N(3.0))XXX
+Step 3: Call(Binary(Minus,N(21.0),N(3.0)),B(true))
+XXXCall(Binary(Minus,N(21.0),N(3.0)),B(true))XXX
+XXXBinary(Minus,N(21.0),N(3.0))XXX
+Step 4: Call(N(18.0),B(true))
+XXXCall(N(18.0),B(true))XXX
+------------------------------------------------------------
+Evaluating with step ...
+Step 0: Call(Call(Function(None,x,N(0.0)),N(10.0)),B(true))
+XXXCall(Call(Function(None,x,N(0.0)),N(10.0)),B(true))XXX
+XXXCall(Function(None,x,N(0.0)),N(10.0))XXX
+Step 1: Call(N(0.0),B(true))
+XXXCall(N(0.0),B(true))XXX
+[32m- should yield a dynamic type error[0m
+[32mstep/simple-programs[0m
+------------------------------------------------------------
+Evaluating with step ...
+Step 0: ConstDecl(w,Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Call(Var(w),N(3.0)))
+XXXConstDecl(w,Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Call(Var(w),N(3.0)))XXX
+Step 1: Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),N(3.0))
+XXXCall(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),N(3.0))XXX
+Step 2: If(Binary(Eq,N(3.0),N(0.0)),N(0.1),Binary(Plus,N(3.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Binary(Minus,N(3.0),N(1.0)))))
+XXXIf(Binary(Eq,N(3.0),N(0.0)),N(0.1),Binary(Plus,N(3.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Binary(Minus,N(3.0),N(1.0)))))XXX
+XXXBinary(Eq,N(3.0),N(0.0))XXX
+Step 3: Binary(Plus,N(3.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Binary(Minus,N(3.0),N(1.0))))
+XXXBinary(Plus,N(3.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Binary(Minus,N(3.0),N(1.0))))XXX
+XXXCall(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Binary(Minus,N(3.0),N(1.0)))XXX
+XXXBinary(Minus,N(3.0),N(1.0))XXX
+Step 4: Binary(Plus,N(3.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),N(2.0)))
+XXXBinary(Plus,N(3.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),N(2.0)))XXX
+XXXCall(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),N(2.0))XXX
+Step 5: Binary(Plus,N(3.0),If(Binary(Eq,N(2.0),N(0.0)),N(0.1),Binary(Plus,N(2.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Binary(Minus,N(2.0),N(1.0))))))
+XXXBinary(Plus,N(3.0),If(Binary(Eq,N(2.0),N(0.0)),N(0.1),Binary(Plus,N(2.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Binary(Minus,N(2.0),N(1.0))))))XXX
+XXXIf(Binary(Eq,N(2.0),N(0.0)),N(0.1),Binary(Plus,N(2.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Binary(Minus,N(2.0),N(1.0)))))XXX
+XXXBinary(Eq,N(2.0),N(0.0))XXX
+Step 6: Binary(Plus,N(3.0),Binary(Plus,N(2.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Binary(Minus,N(2.0),N(1.0)))))
+XXXBinary(Plus,N(3.0),Binary(Plus,N(2.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Binary(Minus,N(2.0),N(1.0)))))XXX
+XXXBinary(Plus,N(2.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Binary(Minus,N(2.0),N(1.0))))XXX
+XXXCall(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Binary(Minus,N(2.0),N(1.0)))XXX
+XXXBinary(Minus,N(2.0),N(1.0))XXX
+Step 7: Binary(Plus,N(3.0),Binary(Plus,N(2.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),N(1.0))))
+XXXBinary(Plus,N(3.0),Binary(Plus,N(2.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),N(1.0))))XXX
+XXXBinary(Plus,N(2.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),N(1.0)))XXX
+XXXCall(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),N(1.0))XXX
+Step 8: Binary(Plus,N(3.0),Binary(Plus,N(2.0),If(Binary(Eq,N(1.0),N(0.0)),N(0.1),Binary(Plus,N(1.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Binary(Minus,N(1.0),N(1.0)))))))
+XXXBinary(Plus,N(3.0),Binary(Plus,N(2.0),If(Binary(Eq,N(1.0),N(0.0)),N(0.1),Binary(Plus,N(1.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Binary(Minus,N(1.0),N(1.0)))))))XXX
+XXXBinary(Plus,N(2.0),If(Binary(Eq,N(1.0),N(0.0)),N(0.1),Binary(Plus,N(1.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Binary(Minus,N(1.0),N(1.0))))))XXX
+XXXIf(Binary(Eq,N(1.0),N(0.0)),N(0.1),Binary(Plus,N(1.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Binary(Minus,N(1.0),N(1.0)))))XXX
+XXXBinary(Eq,N(1.0),N(0.0))XXX
+Step 9: Binary(Plus,N(3.0),Binary(Plus,N(2.0),Binary(Plus,N(1.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Binary(Minus,N(1.0),N(1.0))))))
+XXXBinary(Plus,N(3.0),Binary(Plus,N(2.0),Binary(Plus,N(1.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Binary(Minus,N(1.0),N(1.0))))))XXX
+XXXBinary(Plus,N(2.0),Binary(Plus,N(1.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Binary(Minus,N(1.0),N(1.0)))))XXX
+XXXBinary(Plus,N(1.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Binary(Minus,N(1.0),N(1.0))))XXX
+XXXCall(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Binary(Minus,N(1.0),N(1.0)))XXX
+XXXBinary(Minus,N(1.0),N(1.0))XXX
+Step 10: Binary(Plus,N(3.0),Binary(Plus,N(2.0),Binary(Plus,N(1.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),N(0.0)))))
+XXXBinary(Plus,N(3.0),Binary(Plus,N(2.0),Binary(Plus,N(1.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),N(0.0)))))XXX
+XXXBinary(Plus,N(2.0),Binary(Plus,N(1.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),N(0.0))))XXX
+XXXBinary(Plus,N(1.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),N(0.0)))XXX
+XXXCall(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),N(0.0))XXX
+Step 11: Binary(Plus,N(3.0),Binary(Plus,N(2.0),Binary(Plus,N(1.0),If(Binary(Eq,N(0.0),N(0.0)),N(0.1),Binary(Plus,N(0.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Binary(Minus,N(0.0),N(1.0))))))))
+XXXBinary(Plus,N(3.0),Binary(Plus,N(2.0),Binary(Plus,N(1.0),If(Binary(Eq,N(0.0),N(0.0)),N(0.1),Binary(Plus,N(0.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Binary(Minus,N(0.0),N(1.0))))))))XXX
+XXXBinary(Plus,N(2.0),Binary(Plus,N(1.0),If(Binary(Eq,N(0.0),N(0.0)),N(0.1),Binary(Plus,N(0.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Binary(Minus,N(0.0),N(1.0)))))))XXX
+XXXBinary(Plus,N(1.0),If(Binary(Eq,N(0.0),N(0.0)),N(0.1),Binary(Plus,N(0.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Binary(Minus,N(0.0),N(1.0))))))XXX
+XXXIf(Binary(Eq,N(0.0),N(0.0)),N(0.1),Binary(Plus,N(0.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Binary(Minus,N(0.0),N(1.0)))))XXX
+XXXBinary(Eq,N(0.0),N(0.0))XXX
+Step 12: Binary(Plus,N(3.0),Binary(Plus,N(2.0),Binary(Plus,N(1.0),N(0.1))))
+XXXBinary(Plus,N(3.0),Binary(Plus,N(2.0),Binary(Plus,N(1.0),N(0.1))))XXX
+XXXBinary(Plus,N(2.0),Binary(Plus,N(1.0),N(0.1)))XXX
+XXXBinary(Plus,N(1.0),N(0.1))XXX
+Step 13: Binary(Plus,N(3.0),Binary(Plus,N(2.0),N(1.1)))
+XXXBinary(Plus,N(3.0),Binary(Plus,N(2.0),N(1.1)))XXX
+XXXBinary(Plus,N(2.0),N(1.1))XXX
+Step 14: Binary(Plus,N(3.0),N(3.1))
+XXXBinary(Plus,N(3.0),N(3.1))XXX
+Step 15: N(6.1)
+Value: N(6.1)
+------------------------------------------------------------
+Evaluating with step ...
+Step 0: ConstDecl(x,N(1.0),ConstDecl(g,Function(None,y,Var(x)),ConstDecl(h,Function(None,x,Call(Var(g),N(2.0))),Call(Var(h),N(3.0)))))
+XXXConstDecl(x,N(1.0),ConstDecl(g,Function(None,y,Var(x)),ConstDecl(h,Function(None,x,Call(Var(g),N(2.0))),Call(Var(h),N(3.0)))))XXX
+Step 1: ConstDecl(g,Function(None,y,N(1.0)),ConstDecl(h,Function(None,x,Call(Var(g),N(2.0))),Call(Var(h),N(3.0))))
+XXXConstDecl(g,Function(None,y,N(1.0)),ConstDecl(h,Function(None,x,Call(Var(g),N(2.0))),Call(Var(h),N(3.0))))XXX
+Step 2: ConstDecl(h,Function(None,x,Call(Function(None,y,N(1.0)),N(2.0))),Call(Var(h),N(3.0)))
+XXXConstDecl(h,Function(None,x,Call(Function(None,y,N(1.0)),N(2.0))),Call(Var(h),N(3.0)))XXX
+Step 3: Call(Function(None,x,Call(Function(None,y,N(1.0)),N(2.0))),N(3.0))
+XXXCall(Function(None,x,Call(Function(None,y,N(1.0)),N(2.0))),N(3.0))XXX
+Step 4: Call(Function(None,y,N(1.0)),N(2.0))
+XXXCall(Function(None,y,N(1.0)),N(2.0))XXX
+Step 5: N(1.0)
+Value: N(1.0)
+------------------------------------------------------------
+Evaluating with step ...
+Step 0: ConstDecl(g,Function(None,x,Function(None,y,Binary(And,Var(x),Var(y)))),Binary(Plus,Call(Call(Var(g),N(1.0)),N(0.0)),N(0.1)))
+XXXConstDecl(g,Function(None,x,Function(None,y,Binary(And,Var(x),Var(y)))),Binary(Plus,Call(Call(Var(g),N(1.0)),N(0.0)),N(0.1)))XXX
+Step 1: Binary(Plus,Call(Call(Function(None,x,Function(None,y,Binary(And,Var(x),Var(y)))),N(1.0)),N(0.0)),N(0.1))
+XXXBinary(Plus,Call(Call(Function(None,x,Function(None,y,Binary(And,Var(x),Var(y)))),N(1.0)),N(0.0)),N(0.1))XXX
+XXXCall(Call(Function(None,x,Function(None,y,Binary(And,Var(x),Var(y)))),N(1.0)),N(0.0))XXX
+XXXCall(Function(None,x,Function(None,y,Binary(And,Var(x),Var(y)))),N(1.0))XXX
+Step 2: Binary(Plus,Call(Function(None,y,Binary(And,N(1.0),Var(y))),N(0.0)),N(0.1))
+XXXBinary(Plus,Call(Function(None,y,Binary(And,N(1.0),Var(y))),N(0.0)),N(0.1))XXX
+XXXCall(Function(None,y,Binary(And,N(1.0),Var(y))),N(0.0))XXX
+Step 3: Binary(Plus,Binary(And,N(1.0),N(0.0)),N(0.1))
+XXXBinary(Plus,Binary(And,N(1.0),N(0.0)),N(0.1))XXX
+XXXBinary(And,N(1.0),N(0.0))XXX
+Step 4: Binary(Plus,N(0.0),N(0.1))
+XXXBinary(Plus,N(0.0),N(0.1))XXX
+Step 5: N(0.1)
+Value: N(0.1)
+------------------------------------------------------------
+Evaluating with step ...
+Step 0: ConstDecl(plus,Function(None,x,Function(None,y,Binary(Plus,Var(x),Var(y)))),Call(Call(Var(plus),Binary(Plus,N(1.0),N(2.0))),N(3.0)))
+XXXConstDecl(plus,Function(None,x,Function(None,y,Binary(Plus,Var(x),Var(y)))),Call(Call(Var(plus),Binary(Plus,N(1.0),N(2.0))),N(3.0)))XXX
+Step 1: Call(Call(Function(None,x,Function(None,y,Binary(Plus,Var(x),Var(y)))),Binary(Plus,N(1.0),N(2.0))),N(3.0))
+XXXCall(Call(Function(None,x,Function(None,y,Binary(Plus,Var(x),Var(y)))),Binary(Plus,N(1.0),N(2.0))),N(3.0))XXX
+XXXCall(Function(None,x,Function(None,y,Binary(Plus,Var(x),Var(y)))),Binary(Plus,N(1.0),N(2.0)))XXX
+XXXBinary(Plus,N(1.0),N(2.0))XXX
+Step 2: Call(Call(Function(None,x,Function(None,y,Binary(Plus,Var(x),Var(y)))),N(3.0)),N(3.0))
+XXXCall(Call(Function(None,x,Function(None,y,Binary(Plus,Var(x),Var(y)))),N(3.0)),N(3.0))XXX
+XXXCall(Function(None,x,Function(None,y,Binary(Plus,Var(x),Var(y)))),N(3.0))XXX
+Step 3: Call(Function(None,y,Binary(Plus,N(3.0),Var(y))),N(3.0))
+XXXCall(Function(None,y,Binary(Plus,N(3.0),Var(y))),N(3.0))XXX
+Step 4: Binary(Plus,N(3.0),N(3.0))
+XXXBinary(Plus,N(3.0),N(3.0))XXX
+Step 5: N(6.0)
+Value: N(6.0)
+[32m- should evaluate JavaScripty programs according to the lab spec[0m
+[32mstep/recursive-programs[0m
+------------------------------------------------------------
+Evaluating with step ...
+Step 0: ConstDecl(factorial,Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Call(Var(factorial),N(3.0)))
+XXXConstDecl(factorial,Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Call(Var(factorial),N(3.0)))XXX
+Step 1: Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),N(3.0))
+XXXCall(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),N(3.0))XXX
+Step 2: If(Binary(Eq,N(3.0),N(0.0)),N(1.0),Binary(Times,N(3.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(3.0),N(1.0)))))
+XXXIf(Binary(Eq,N(3.0),N(0.0)),N(1.0),Binary(Times,N(3.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(3.0),N(1.0)))))XXX
+XXXBinary(Eq,N(3.0),N(0.0))XXX
+Step 3: Binary(Times,N(3.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(3.0),N(1.0))))
+XXXBinary(Times,N(3.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(3.0),N(1.0))))XXX
+XXXCall(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(3.0),N(1.0)))XXX
+XXXBinary(Minus,N(3.0),N(1.0))XXX
+Step 4: Binary(Times,N(3.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),N(2.0)))
+XXXBinary(Times,N(3.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),N(2.0)))XXX
+XXXCall(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),N(2.0))XXX
+Step 5: Binary(Times,N(3.0),If(Binary(Eq,N(2.0),N(0.0)),N(1.0),Binary(Times,N(2.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(2.0),N(1.0))))))
+XXXBinary(Times,N(3.0),If(Binary(Eq,N(2.0),N(0.0)),N(1.0),Binary(Times,N(2.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(2.0),N(1.0))))))XXX
+XXXIf(Binary(Eq,N(2.0),N(0.0)),N(1.0),Binary(Times,N(2.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(2.0),N(1.0)))))XXX
+XXXBinary(Eq,N(2.0),N(0.0))XXX
+Step 6: Binary(Times,N(3.0),Binary(Times,N(2.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(2.0),N(1.0)))))
+XXXBinary(Times,N(3.0),Binary(Times,N(2.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(2.0),N(1.0)))))XXX
+XXXBinary(Times,N(2.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(2.0),N(1.0))))XXX
+XXXCall(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(2.0),N(1.0)))XXX
+XXXBinary(Minus,N(2.0),N(1.0))XXX
+Step 7: Binary(Times,N(3.0),Binary(Times,N(2.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),N(1.0))))
+XXXBinary(Times,N(3.0),Binary(Times,N(2.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),N(1.0))))XXX
+XXXBinary(Times,N(2.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),N(1.0)))XXX
+XXXCall(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),N(1.0))XXX
+Step 8: Binary(Times,N(3.0),Binary(Times,N(2.0),If(Binary(Eq,N(1.0),N(0.0)),N(1.0),Binary(Times,N(1.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(1.0),N(1.0)))))))
+XXXBinary(Times,N(3.0),Binary(Times,N(2.0),If(Binary(Eq,N(1.0),N(0.0)),N(1.0),Binary(Times,N(1.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(1.0),N(1.0)))))))XXX
+XXXBinary(Times,N(2.0),If(Binary(Eq,N(1.0),N(0.0)),N(1.0),Binary(Times,N(1.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(1.0),N(1.0))))))XXX
+XXXIf(Binary(Eq,N(1.0),N(0.0)),N(1.0),Binary(Times,N(1.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(1.0),N(1.0)))))XXX
+XXXBinary(Eq,N(1.0),N(0.0))XXX
+Step 9: Binary(Times,N(3.0),Binary(Times,N(2.0),Binary(Times,N(1.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(1.0),N(1.0))))))
+XXXBinary(Times,N(3.0),Binary(Times,N(2.0),Binary(Times,N(1.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(1.0),N(1.0))))))XXX
+XXXBinary(Times,N(2.0),Binary(Times,N(1.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(1.0),N(1.0)))))XXX
+XXXBinary(Times,N(1.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(1.0),N(1.0))))XXX
+XXXCall(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(1.0),N(1.0)))XXX
+XXXBinary(Minus,N(1.0),N(1.0))XXX
+Step 10: Binary(Times,N(3.0),Binary(Times,N(2.0),Binary(Times,N(1.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),N(0.0)))))
+XXXBinary(Times,N(3.0),Binary(Times,N(2.0),Binary(Times,N(1.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),N(0.0)))))XXX
+XXXBinary(Times,N(2.0),Binary(Times,N(1.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),N(0.0))))XXX
+XXXBinary(Times,N(1.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),N(0.0)))XXX
+XXXCall(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),N(0.0))XXX
+Step 11: Binary(Times,N(3.0),Binary(Times,N(2.0),Binary(Times,N(1.0),If(Binary(Eq,N(0.0),N(0.0)),N(1.0),Binary(Times,N(0.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(0.0),N(1.0))))))))
+XXXBinary(Times,N(3.0),Binary(Times,N(2.0),Binary(Times,N(1.0),If(Binary(Eq,N(0.0),N(0.0)),N(1.0),Binary(Times,N(0.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(0.0),N(1.0))))))))XXX
+XXXBinary(Times,N(2.0),Binary(Times,N(1.0),If(Binary(Eq,N(0.0),N(0.0)),N(1.0),Binary(Times,N(0.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(0.0),N(1.0)))))))XXX
+XXXBinary(Times,N(1.0),If(Binary(Eq,N(0.0),N(0.0)),N(1.0),Binary(Times,N(0.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(0.0),N(1.0))))))XXX
+XXXIf(Binary(Eq,N(0.0),N(0.0)),N(1.0),Binary(Times,N(0.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(0.0),N(1.0)))))XXX
+XXXBinary(Eq,N(0.0),N(0.0))XXX
+Step 12: Binary(Times,N(3.0),Binary(Times,N(2.0),Binary(Times,N(1.0),N(1.0))))
+XXXBinary(Times,N(3.0),Binary(Times,N(2.0),Binary(Times,N(1.0),N(1.0))))XXX
+XXXBinary(Times,N(2.0),Binary(Times,N(1.0),N(1.0)))XXX
+XXXBinary(Times,N(1.0),N(1.0))XXX
+Step 13: Binary(Times,N(3.0),Binary(Times,N(2.0),N(1.0)))
+XXXBinary(Times,N(3.0),Binary(Times,N(2.0),N(1.0)))XXX
+XXXBinary(Times,N(2.0),N(1.0))XXX
+Step 14: Binary(Times,N(3.0),N(2.0))
+XXXBinary(Times,N(3.0),N(2.0))XXX
+Step 15: N(6.0)
+Value: N(6.0)
+------------------------------------------------------------
+Evaluating with step ...
+Step 0: ConstDecl(repeat,Function(None,s,Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,Var(s),Call(Var(loop),Binary(Minus,Var(n),N(1.0))))))),Call(Call(Var(repeat),S(a)),N(3.0)))
+XXXConstDecl(repeat,Function(None,s,Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,Var(s),Call(Var(loop),Binary(Minus,Var(n),N(1.0))))))),Call(Call(Var(repeat),S(a)),N(3.0)))XXX
+Step 1: Call(Call(Function(None,s,Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,Var(s),Call(Var(loop),Binary(Minus,Var(n),N(1.0))))))),S(a)),N(3.0))
+XXXCall(Call(Function(None,s,Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,Var(s),Call(Var(loop),Binary(Minus,Var(n),N(1.0))))))),S(a)),N(3.0))XXX
+XXXCall(Function(None,s,Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,Var(s),Call(Var(loop),Binary(Minus,Var(n),N(1.0))))))),S(a))XXX
+Step 2: Call(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),N(3.0))
+XXXCall(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),N(3.0))XXX
+Step 3: If(Binary(Eq,N(3.0),N(0.0)),S(),Binary(Plus,S(a),Call(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(3.0),N(1.0)))))
+XXXIf(Binary(Eq,N(3.0),N(0.0)),S(),Binary(Plus,S(a),Call(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(3.0),N(1.0)))))XXX
+XXXBinary(Eq,N(3.0),N(0.0))XXX
+Step 4: Binary(Plus,S(a),Call(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(3.0),N(1.0))))
+XXXBinary(Plus,S(a),Call(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(3.0),N(1.0))))XXX
+XXXCall(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(3.0),N(1.0)))XXX
+XXXBinary(Minus,N(3.0),N(1.0))XXX
+Step 5: Binary(Plus,S(a),Call(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),N(2.0)))
+XXXBinary(Plus,S(a),Call(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),N(2.0)))XXX
+XXXCall(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),N(2.0))XXX
+Step 6: Binary(Plus,S(a),If(Binary(Eq,N(2.0),N(0.0)),S(),Binary(Plus,S(a),Call(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(2.0),N(1.0))))))
+XXXBinary(Plus,S(a),If(Binary(Eq,N(2.0),N(0.0)),S(),Binary(Plus,S(a),Call(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(2.0),N(1.0))))))XXX
+XXXIf(Binary(Eq,N(2.0),N(0.0)),S(),Binary(Plus,S(a),Call(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(2.0),N(1.0)))))XXX
+XXXBinary(Eq,N(2.0),N(0.0))XXX
+Step 7: Binary(Plus,S(a),Binary(Plus,S(a),Call(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(2.0),N(1.0)))))
+XXXBinary(Plus,S(a),Binary(Plus,S(a),Call(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(2.0),N(1.0)))))XXX
+XXXBinary(Plus,S(a),Call(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(2.0),N(1.0))))XXX
+XXXCall(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(2.0),N(1.0)))XXX
+XXXBinary(Minus,N(2.0),N(1.0))XXX
+Step 8: Binary(Plus,S(a),Binary(Plus,S(a),Call(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),N(1.0))))
+XXXBinary(Plus,S(a),Binary(Plus,S(a),Call(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),N(1.0))))XXX
+XXXBinary(Plus,S(a),Call(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),N(1.0)))XXX
+XXXCall(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),N(1.0))XXX
+Step 9: Binary(Plus,S(a),Binary(Plus,S(a),If(Binary(Eq,N(1.0),N(0.0)),S(),Binary(Plus,S(a),Call(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(1.0),N(1.0)))))))
+XXXBinary(Plus,S(a),Binary(Plus,S(a),If(Binary(Eq,N(1.0),N(0.0)),S(),Binary(Plus,S(a),Call(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(1.0),N(1.0)))))))XXX
+XXXBinary(Plus,S(a),If(Binary(Eq,N(1.0),N(0.0)),S(),Binary(Plus,S(a),Call(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(1.0),N(1.0))))))XXX
+XXXIf(Binary(Eq,N(1.0),N(0.0)),S(),Binary(Plus,S(a),Call(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(1.0),N(1.0)))))XXX
+XXXBinary(Eq,N(1.0),N(0.0))XXX
+Step 10: Binary(Plus,S(a),Binary(Plus,S(a),Binary(Plus,S(a),Call(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(1.0),N(1.0))))))
+XXXBinary(Plus,S(a),Binary(Plus,S(a),Binary(Plus,S(a),Call(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(1.0),N(1.0))))))XXX
+XXXBinary(Plus,S(a),Binary(Plus,S(a),Call(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(1.0),N(1.0)))))XXX
+XXXBinary(Plus,S(a),Call(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(1.0),N(1.0))))XXX
+XXXCall(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(1.0),N(1.0)))XXX
+XXXBinary(Minus,N(1.0),N(1.0))XXX
+Step 11: Binary(Plus,S(a),Binary(Plus,S(a),Binary(Plus,S(a),Call(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),N(0.0)))))
+XXXBinary(Plus,S(a),Binary(Plus,S(a),Binary(Plus,S(a),Call(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),N(0.0)))))XXX
+XXXBinary(Plus,S(a),Binary(Plus,S(a),Call(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),N(0.0))))XXX
+XXXBinary(Plus,S(a),Call(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),N(0.0)))XXX
+XXXCall(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),N(0.0))XXX
+Step 12: Binary(Plus,S(a),Binary(Plus,S(a),Binary(Plus,S(a),If(Binary(Eq,N(0.0),N(0.0)),S(),Binary(Plus,S(a),Call(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(0.0),N(1.0))))))))
+XXXBinary(Plus,S(a),Binary(Plus,S(a),Binary(Plus,S(a),If(Binary(Eq,N(0.0),N(0.0)),S(),Binary(Plus,S(a),Call(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(0.0),N(1.0))))))))XXX
+XXXBinary(Plus,S(a),Binary(Plus,S(a),If(Binary(Eq,N(0.0),N(0.0)),S(),Binary(Plus,S(a),Call(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(0.0),N(1.0)))))))XXX
+XXXBinary(Plus,S(a),If(Binary(Eq,N(0.0),N(0.0)),S(),Binary(Plus,S(a),Call(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(0.0),N(1.0))))))XXX
+XXXIf(Binary(Eq,N(0.0),N(0.0)),S(),Binary(Plus,S(a),Call(Function(Some(loop),n,If(Binary(Eq,Var(n),N(0.0)),S(),Binary(Plus,S(a),Call(Var(loop),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(0.0),N(1.0)))))XXX
+XXXBinary(Eq,N(0.0),N(0.0))XXX
+Step 13: Binary(Plus,S(a),Binary(Plus,S(a),Binary(Plus,S(a),S())))
+XXXBinary(Plus,S(a),Binary(Plus,S(a),Binary(Plus,S(a),S())))XXX
+XXXBinary(Plus,S(a),Binary(Plus,S(a),S()))XXX
+XXXBinary(Plus,S(a),S())XXX
+Step 14: Binary(Plus,S(a),Binary(Plus,S(a),S(a)))
+XXXBinary(Plus,S(a),Binary(Plus,S(a),S(a)))XXX
+XXXBinary(Plus,S(a),S(a))XXX
+Step 15: Binary(Plus,S(a),S(aa))
+XXXBinary(Plus,S(a),S(aa))XXX
+Step 16: S(aaa)
+Value: S(aaa)
+[32m- should evaluate recursive JavaScripty programs according to the lab spec[0m
+[36mRun completed in 602 milliseconds.[0m
+[36mTotal number of tests run: 13[0m
+[36mSuites: completed 1, aborted 0[0m
+[36mTests: succeeded 11, failed 2, canceled 0, ignored 0, pending 0[0m
+[31m*** 2 TESTS FAILED ***[0m
+[0m[[32msuccess[0m] [0mTotal time: 10 s, completed Feb 20, 2014 10:50:42 AM[0m

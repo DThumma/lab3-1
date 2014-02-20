@@ -162,12 +162,12 @@ object Lab3 extends jsy.util.JsyApplication {
       
       case Binary(Seq, e1, e2) => eToVal(e1); eToVal(e2)
       
-      case If(e1, e2, e3) => if (eToB(eval(env,e1))) eToVal(e2) else eToVal(e3)
+      case If(e1, e2, e3) => if (eToB(e1)) eToVal(e2) else eToVal(e3)
       
       case ConstDecl(x, e1, e2) => eval(extend(env, x, eToVal(e1)), e2)
       //
        case Call(e1, e2) =>  {
-	  val v1 = eval(env, e1) 
+	  val v1 = eToVal(e1)
 	  println("BUTTS" + v1);
 		v1 match{
 		  	//case Function(Some(p),x,e3) => eval(extend(env, x, eToVal(e2)), e3)
@@ -296,14 +296,6 @@ object Lab3 extends jsy.util.JsyApplication {
 	  
 	  case If(e1, e2, e3) if (isValue(e1)) => {println("IFSTEP"); if (toBoolean(e1)) return e2 else return e3}
 	  case ConstDecl(x, e1, e2) if (isValue(e1)) => return substitute(e2, e1, x)
-//      case Call(e1, e2) => { 
-//        if (!(isValue(e1) && isValue(e2))) throw new DynamicTypeError(e)
-//        else e1 match {
-//        case Function(Some(p), x, e3 ) => return substitute(substitute(e3, e1, p),e2,x);
-//        case Function(None, x, e3 ) => return substitute(e3, e2, x)
-//        case _ => throw new DynamicTypeError(e);
-//        }
-//      }
         case Call(e1, e2) if ((isValue(e1) && isValue(e2))) => e1 match {
         case Function(Some(p), x, e3 ) => return substitute(substitute(e3, e1, p),e2,x);
         case Function(None, x, e3 ) => return substitute(e3, e2, x)
@@ -312,13 +304,53 @@ object Lab3 extends jsy.util.JsyApplication {
 
             
       
-      
-      
-      
-      
+       
       
       /* Inductive Cases: Search Rules */
       case Print(e1) => Print(step(e1))
+      
+      //SearchUnary
+      case Unary(uop, e1) => Unary(uop, step(e1))
+
+      //Binary Cases with the First as a Value
+      case Binary(bop, v1, e2) if (isValue(v1)) => (bop: @unchecked, v1, e2) match {
+        //TypeErrorEquality1 & Factors in SearchEquality2
+        case (bop @ (Eq | Ne), Function(_,_,_), e2) => throw new DynamicTypeError(e)
+        
+        //SearchBinaryArith2 & SearchEquality2
+        case (bop, v1, e2) => Binary(bop, v1, step(e2))
+      }
+      
+      //Binary Cases with Both as Expressions
+      case Binary(bop, e1, e2) => (bop: @unchecked, e1, e2) match {
+    	//TypeErrorEquality1  
+      	case (bop @ (Eq | Ne), e1, Function(_,_,_)) => throw new DynamicTypeError(e)
+        
+        //SearchBinary1
+        case (bop, e1, e2) => Binary(bop, step(e1), e2)
+      }
+
+      //SearchIf
+      case If(e1, e2, e3) => if(toBoolean(step(e1))) e2 else e3
+      
+      //SearchConst
+      case ConstDecl(x, e1, e2) => ConstDecl(x, step(e1), e2)
+      
+      //SearchCall Cases
+      case Call(e1, e2) => (e1, e2) match {
+    	//SearchCall2 Cases; with and without function name
+      	case (Function(None, x, eprime), e2) => Call(Function(None, x, eprime), step(e2))
+    	case (Function(Some(f), x, eprime), e2) => Call(Function(Some(f), x, eprime), step(e2))
+    	
+    	//TypeErrorCall -> if e1 is Value and not a Function error
+    	case (e1, e2) if (isValue(e1))=> throw new DynamicTypeError(e)
+    	
+    	//SearchCall1
+    	case (e1, e2) => Call(step(e1), e2)
+      }
+      
+      
+      
       
         // ****** Your cases here
       
