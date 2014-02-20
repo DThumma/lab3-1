@@ -162,7 +162,7 @@ object Lab3 extends jsy.util.JsyApplication {
       
       case Binary(Seq, e1, e2) => eToVal(e1); eToVal(e2)
       
-      case If(e1, e2, e3) => if (eToB(e1)) eToVal(e2) else eToVal(e3)
+      case If(e1, e2, e3) => if (eToB(eval(env,e1))) eToVal(e2) else eToVal(e3)
       
       case ConstDecl(x, e1, e2) => eval(extend(env, x, eToVal(e1)), e2)
       //
@@ -294,16 +294,23 @@ object Lab3 extends jsy.util.JsyApplication {
 		case Or if (isValue(e1)) => if (toBoolean(e1)) return B(true) else return e2
 	  }
 	  
-	  case If(e1, e2, e3) if (isValue(e1)) => if (toBoolean(e1)) return e2 else return e3
+	  case If(e1, e2, e3) if (isValue(e1)) => {println("IFSTEP"); if (toBoolean(e1)) return e2 else return e3}
 	  case ConstDecl(x, e1, e2) if (isValue(e1)) => return substitute(e2, e1, x)
-      case Call(e1, e2) => { 
-        if (!(isValue(e1) && isValue(e2))) throw new DynamicTypeError(e)
-        else e1 match {
+//      case Call(e1, e2) => { 
+//        if (!(isValue(e1) && isValue(e2))) throw new DynamicTypeError(e)
+//        else e1 match {
+//        case Function(Some(p), x, e3 ) => return substitute(substitute(e3, e1, p),e2,x);
+//        case Function(None, x, e3 ) => return substitute(e3, e2, x)
+//        case _ => throw new DynamicTypeError(e);
+//        }
+//      }
+        case Call(e1, e2) if ((isValue(e1) && isValue(e2))) => e1 match {
         case Function(Some(p), x, e3 ) => return substitute(substitute(e3, e1, p),e2,x);
         case Function(None, x, e3 ) => return substitute(e3, e2, x)
         case _ => throw new DynamicTypeError(e);
         }
-      }
+
+            
       
       
       
@@ -318,6 +325,7 @@ object Lab3 extends jsy.util.JsyApplication {
       /* Cases that should never match. Your cases above should ensure this. */
       case Var(_) => throw new AssertionError("Gremlins: internal error, not closed expression.")
       case N(_) | B(_) | Undefined | S(_) | Function(_, _, _) => throw new AssertionError("Gremlins: internal error, step should not be called on values.");
+      case _ => throw new DynamicTypeError(e)
     }
   }
   

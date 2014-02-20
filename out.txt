@@ -1,0 +1,474 @@
+Loading /usr/share/sbt/bin/sbt-launch-lib.bash
+[0m[[0minfo[0m] [0mLoading project definition from /home/samuel/Documents/pl/CSCI-3155/lab3/project[0m
+[0m[[0minfo[0m] [0mSet current project to lab3 (in build file:/home/samuel/Documents/pl/CSCI-3155/lab3/)[0m
+[0m[[0minfo[0m] [0mSet current project to lab3-grader (in build file:/home/samuel/Documents/pl/CSCI-3155/lab3/)[0m
+[0m[[0minfo[0m] [0mRunning Lab3Grader [0m
+[36mRun starting. Expected test count is: 13[0m
+[32mLab3Grading:[0m
+[32meval/fun-equality[0m
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Binary(Eq,Function(None,x,N(0.0)),N(0.0))
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Binary(Eq,N(0.0),Function(None,x,N(0.0)))
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Binary(Ne,Function(None,x,N(0.0)),N(0.0))
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Binary(Ne,N(0.0),Function(None,x,N(0.0)))
+[32m- should yield a dynamic type error[0m
+[32meval/call-non-fun[0m
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Call(N(3.0),N(4.0))
+BUTTSN(3.0)
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Call(N(3.0),B(true))
+BUTTSN(3.0)
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Call(Binary(Minus,Binary(Plus,Binary(Plus,N(10.0),N(4.0)),N(7.0)),Binary(Times,B(true),N(3.0))),B(true))
+BUTTSN(18.0)
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Call(Call(Function(None,x,N(0.0)),N(10.0)),B(true))
+BUTTSFunction(None,x,N(0.0))
+BUTTSN(0.0)
+[32m- should yield a dynamic type error[0m
+[32meval/arithmetic-conversions[0m
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Binary(Lt,Function(None,x,N(0.0)),Undefined)
+Value: B(false)
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Binary(Lt,N(30.0),S(4))
+Value: B(false)
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Binary(Gt,S(30),N(4.0))
+Value: B(true)
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Binary(Gt,N(30.0),Undefined)
+Value: B(false)
+[32m- should evaluate JavaScripty arithmetic expressions according to the lab spec[0m
+[32meval/simple-programs[0m
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  ConstDecl(w,Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Call(Var(w),N(3.0)))
+BUTTSFunction(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0))))))
+BUTTSFunction(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0))))))
+BUTTSFunction(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0))))))
+BUTTSFunction(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0))))))
+Value: N(6.1)
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  ConstDecl(x,N(1.0),ConstDecl(g,Function(None,y,Var(x)),ConstDecl(h,Function(None,x,Call(Var(g),N(2.0))),Call(Var(h),N(3.0)))))
+BUTTSFunction(None,x,Call(Var(g),N(2.0)))
+BUTTSFunction(None,y,Var(x))
+Value: N(3.0)
+[32m- should evaluate JavaScripty programs according to the lab spec[0m
+[32meval/scoping[0m
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  ConstDecl(g,Function(None,x,Function(None,y,Binary(And,Var(x),Var(y)))),Binary(Plus,Call(Call(Var(g),N(1.0)),N(0.0)),N(0.1)))
+BUTTSFunction(None,x,Function(None,y,Binary(And,Var(x),Var(y))))
+BUTTSFunction(None,y,Binary(And,Var(x),Var(y)))
+[32m- should evaluate JavaScripty programs according to the lab spec[0m
+[32meval/recursive-programs[0m
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  ConstDecl(factorial,Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Call(Var(factorial),N(4.0)))
+BUTTSFunction(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0))))))
+BUTTSFunction(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0))))))
+BUTTSFunction(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0))))))
+BUTTSFunction(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0))))))
+BUTTSFunction(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0))))))
+Value: N(24.0)
+[32m- should evaluate recursive JavaScripty programs according to the lab spec[0m
+[32msubstitute/no-shadow[0m
+[32m- should substitute a value for uses of a variable[0m
+[32msubstitute/shadow[0m
+XXXUnary(Neg,Unary(Neg,N(1.0)))XXX
+[31m- should substitute a value for uses of a variable *** FAILED ***[0m
+[31m  Expected Function(Some(x),y,Binary(Plus,Var(x),Var(y))), but got Function(Some(x),y,Binary(Plus,N(3.0),Var(y))) (Lab3Grading.scala:116)[0m
+[32mstep[0m
+[31m- should perform one step of evaluation according to the lab spec *** FAILED ***[0m
+[31m  jsy.lab3.ast$DynamicTypeError:[0m
+[31m  at Lab3$.step(Lab3.scala:328)[0m
+[31m  at Lab3Grading.assertRefStep(Lab3Grading.scala:15)[0m
+[31m  at Lab3Grading$$anonfun$9$$anonfun$apply$mcV$sp$10.apply(Lab3Grading.scala:138)[0m
+[31m  at Lab3Grading$$anonfun$9$$anonfun$apply$mcV$sp$10.apply(Lab3Grading.scala:121)[0m
+[31m  at scala.collection.immutable.List.foreach(List.scala:318)[0m
+[31m  at Lab3Grading$$anonfun$9.apply$mcV$sp(Lab3Grading.scala:121)[0m
+[31m  at Lab3Grading$$anonfun$9.apply(Lab3Grading.scala:121)[0m
+[31m  at Lab3Grading$$anonfun$9.apply(Lab3Grading.scala:121)[0m
+[31m  at org.scalatest.Transformer$$anonfun$apply$1.apply(Transformer.scala:22)[0m
+[31m  at org.scalatest.Transformer$$anonfun$apply$1.apply(Transformer.scala:22)[0m
+[31m  ...[0m
+[32mstep/fun-equality[0m
+------------------------------------------------------------
+Evaluating with step ...
+Step 0: Binary(Eq,Function(None,x,N(0.0)),N(0.0))
+XXXBinary(Eq,Function(None,x,N(0.0)),N(0.0))XXX
+------------------------------------------------------------
+Evaluating with step ...
+Step 0: Binary(Eq,N(0.0),Function(None,x,N(0.0)))
+XXXBinary(Eq,N(0.0),Function(None,x,N(0.0)))XXX
+------------------------------------------------------------
+Evaluating with step ...
+Step 0: Binary(Ne,Function(None,x,N(0.0)),N(0.0))
+XXXBinary(Ne,Function(None,x,N(0.0)),N(0.0))XXX
+------------------------------------------------------------
+Evaluating with step ...
+Step 0: Binary(Ne,N(0.0),Function(None,x,N(0.0)))
+XXXBinary(Ne,N(0.0),Function(None,x,N(0.0)))XXX
+[32m- should yield a dynamic type error[0m
+[32mstep/call-non-fun[0m
+------------------------------------------------------------
+Evaluating with step ...
+Step 0: Call(N(3.0),N(4.0))
+XXXCall(N(3.0),N(4.0))XXX
+------------------------------------------------------------
+Evaluating with step ...
+Step 0: Call(N(3.0),B(true))
+XXXCall(N(3.0),B(true))XXX
+------------------------------------------------------------
+Evaluating with step ...
+Step 0: Call(Binary(Minus,Binary(Plus,Binary(Plus,N(10.0),N(4.0)),N(7.0)),Binary(Times,B(true),N(3.0))),B(true))
+XXXCall(Binary(Minus,Binary(Plus,Binary(Plus,N(10.0),N(4.0)),N(7.0)),Binary(Times,B(true),N(3.0))),B(true))XXX
+------------------------------------------------------------
+Evaluating with step ...
+Step 0: Call(Call(Function(None,x,N(0.0)),N(10.0)),B(true))
+XXXCall(Call(Function(None,x,N(0.0)),N(10.0)),B(true))XXX
+[32m- should yield a dynamic type error[0m
+[32mstep/simple-programs[0m
+------------------------------------------------------------
+Evaluating with step ...
+Step 0: ConstDecl(w,Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Call(Var(w),N(3.0)))
+XXXConstDecl(w,Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Call(Var(w),N(3.0)))XXX
+Step 1: Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),N(3.0))
+XXXCall(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),N(3.0))XXX
+Step 2: If(Binary(Eq,N(3.0),N(0.0)),N(0.1),Binary(Plus,N(3.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Binary(Minus,N(3.0),N(1.0)))))
+XXXIf(Binary(Eq,N(3.0),N(0.0)),N(0.1),Binary(Plus,N(3.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Binary(Minus,N(3.0),N(1.0)))))XXX
+[31m- should evaluate JavaScripty programs according to the lab spec *** FAILED ***[0m
+[31m  jsy.lab3.ast$DynamicTypeError:[0m
+[31m  at Lab3$.step(Lab3.scala:328)[0m
+[31m  at Lab3$.loop$1(Lab3.scala:361)[0m
+[31m  at Lab3$.iterateStep(Lab3.scala:367)[0m
+[31m  at Lab3Grading.assertRefIterateStep(Lab3Grading.scala:20)[0m
+[31m  at Lab3Grading$$anonfun$12.apply$mcV$sp(Lab3Grading.scala:165)[0m
+[31m  at Lab3Grading$$anonfun$12.apply(Lab3Grading.scala:164)[0m
+[31m  at Lab3Grading$$anonfun$12.apply(Lab3Grading.scala:164)[0m
+[31m  at org.scalatest.Transformer$$anonfun$apply$1.apply(Transformer.scala:22)[0m
+[31m  at org.scalatest.Transformer$$anonfun$apply$1.apply(Transformer.scala:22)[0m
+[31m  at org.scalatest.OutcomeOf$class.outcomeOf(OutcomeOf.scala:85)[0m
+[31m  ...[0m
+[32mstep/recursive-programs[0m
+------------------------------------------------------------
+Evaluating with step ...
+Step 0: ConstDecl(factorial,Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Call(Var(factorial),N(3.0)))
+XXXConstDecl(factorial,Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Call(Var(factorial),N(3.0)))XXX
+Step 1: Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),N(3.0))
+XXXCall(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),N(3.0))XXX
+Step 2: If(Binary(Eq,N(3.0),N(0.0)),N(1.0),Binary(Times,N(3.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(3.0),N(1.0)))))
+XXXIf(Binary(Eq,N(3.0),N(0.0)),N(1.0),Binary(Times,N(3.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(3.0),N(1.0)))))XXX
+[31m- should evaluate recursive JavaScripty programs according to the lab spec *** FAILED ***[0m
+[31m  jsy.lab3.ast$DynamicTypeError:[0m
+[31m  at Lab3$.step(Lab3.scala:328)[0m
+[31m  at Lab3$.loop$1(Lab3.scala:361)[0m
+[31m  at Lab3$.iterateStep(Lab3.scala:367)[0m
+[31m  at Lab3Grading.assertRefIterateStep(Lab3Grading.scala:20)[0m
+[31m  at Lab3Grading$$anonfun$13.apply$mcV$sp(Lab3Grading.scala:194)[0m
+[31m  at Lab3Grading$$anonfun$13.apply(Lab3Grading.scala:193)[0m
+[31m  at Lab3Grading$$anonfun$13.apply(Lab3Grading.scala:193)[0m
+[31m  at org.scalatest.Transformer$$anonfun$apply$1.apply(Transformer.scala:22)[0m
+[31m  at org.scalatest.Transformer$$anonfun$apply$1.apply(Transformer.scala:22)[0m
+[31m  at org.scalatest.OutcomeOf$class.outcomeOf(OutcomeOf.scala:85)[0m
+[31m  ...[0m
+[36mRun completed in 586 milliseconds.[0m
+[36mTotal number of tests run: 13[0m
+[36mSuites: completed 1, aborted 0[0m
+[36mTests: succeeded 9, failed 4, canceled 0, ignored 0, pending 0[0m
+[31m*** 4 TESTS FAILED ***[0m
+[0m[[32msuccess[0m] [0mTotal time: 1 s, completed Feb 20, 2014 10:14:31 AM[0m
+Loading /usr/share/sbt/bin/sbt-launch-lib.bash
+[0m[[0minfo[0m] [0mLoading project definition from /home/samuel/Documents/pl/CSCI-3155/lab3/project[0m
+[0m[[0minfo[0m] [0mSet current project to lab3 (in build file:/home/samuel/Documents/pl/CSCI-3155/lab3/)[0m
+[0m[[0minfo[0m] [0mSet current project to lab3-grader (in build file:/home/samuel/Documents/pl/CSCI-3155/lab3/)[0m
+[0m[[0minfo[0m] [0mCompiling 1 Scala source to /home/samuel/Documents/pl/CSCI-3155/lab3/target/scala-2.10/classes...[0m
+[0m[[33mwarn[0m] [0m/home/samuel/Documents/pl/CSCI-3155/lab3/src/main/scala/Lab3.scala:269: unreachable code[0m
+[0m[[33mwarn[0m] [0m			case(S(s1), S(s2)) => B( s1 < s2 )[0m
+[0m[[33mwarn[0m] [0m			                       ^[0m
+[0m[[33mwarn[0m] [0m/home/samuel/Documents/pl/CSCI-3155/lab3/src/main/scala/Lab3.scala:275: unreachable code[0m
+[0m[[33mwarn[0m] [0m			case(S(s1), S(s2)) => B( s1 > s2 )[0m
+[0m[[33mwarn[0m] [0m			                       ^[0m
+[0m[[33mwarn[0m] [0m/home/samuel/Documents/pl/CSCI-3155/lab3/src/main/scala/Lab3.scala:281: unreachable code[0m
+[0m[[33mwarn[0m] [0m			case(S(s1), S(s2)) => B( s1 <= s2 )[0m
+[0m[[33mwarn[0m] [0m			                       ^[0m
+[0m[[33mwarn[0m] [0m/home/samuel/Documents/pl/CSCI-3155/lab3/src/main/scala/Lab3.scala:288: unreachable code[0m
+[0m[[33mwarn[0m] [0m			case(S(s1), S(s2)) => B( s1 >= s2 )[0m
+[0m[[33mwarn[0m] [0m			                       ^[0m
+[0m[[33mwarn[0m] [0mfour warnings found[0m
+[0m[[0minfo[0m] [0mRunning Lab3Grader [0m
+[36mRun starting. Expected test count is: 13[0m
+[32mLab3Grading:[0m
+[32meval/fun-equality[0m
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Binary(Eq,Function(None,x,N(0.0)),N(0.0))
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Binary(Eq,N(0.0),Function(None,x,N(0.0)))
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Binary(Ne,Function(None,x,N(0.0)),N(0.0))
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Binary(Ne,N(0.0),Function(None,x,N(0.0)))
+[32m- should yield a dynamic type error[0m
+[32meval/call-non-fun[0m
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Call(N(3.0),N(4.0))
+BUTTSN(3.0)
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Call(N(3.0),B(true))
+BUTTSN(3.0)
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Call(Binary(Minus,Binary(Plus,Binary(Plus,N(10.0),N(4.0)),N(7.0)),Binary(Times,B(true),N(3.0))),B(true))
+BUTTSN(18.0)
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Call(Call(Function(None,x,N(0.0)),N(10.0)),B(true))
+BUTTSFunction(None,x,N(0.0))
+BUTTSN(0.0)
+[32m- should yield a dynamic type error[0m
+[32meval/arithmetic-conversions[0m
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Binary(Lt,Function(None,x,N(0.0)),Undefined)
+Value: B(false)
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Binary(Lt,N(30.0),S(4))
+Value: B(false)
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Binary(Gt,S(30),N(4.0))
+Value: B(true)
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  Binary(Gt,N(30.0),Undefined)
+Value: B(false)
+[32m- should evaluate JavaScripty arithmetic expressions according to the lab spec[0m
+[32meval/simple-programs[0m
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  ConstDecl(w,Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Call(Var(w),N(3.0)))
+BUTTSFunction(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0))))))
+BUTTSFunction(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0))))))
+BUTTSFunction(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0))))))
+BUTTSFunction(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0))))))
+Value: N(6.1)
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  ConstDecl(x,N(1.0),ConstDecl(g,Function(None,y,Var(x)),ConstDecl(h,Function(None,x,Call(Var(g),N(2.0))),Call(Var(h),N(3.0)))))
+BUTTSFunction(None,x,Call(Var(g),N(2.0)))
+BUTTSFunction(None,y,Var(x))
+Value: N(3.0)
+[32m- should evaluate JavaScripty programs according to the lab spec[0m
+[32meval/scoping[0m
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  ConstDecl(g,Function(None,x,Function(None,y,Binary(And,Var(x),Var(y)))),Binary(Plus,Call(Call(Var(g),N(1.0)),N(0.0)),N(0.1)))
+BUTTSFunction(None,x,Function(None,y,Binary(And,Var(x),Var(y))))
+BUTTSFunction(None,y,Binary(And,Var(x),Var(y)))
+[32m- should evaluate JavaScripty programs according to the lab spec[0m
+[32meval/recursive-programs[0m
+------------------------------------------------------------
+Evaluating with eval ...
+
+Expression:
+  ConstDecl(factorial,Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Call(Var(factorial),N(4.0)))
+BUTTSFunction(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0))))))
+BUTTSFunction(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0))))))
+BUTTSFunction(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0))))))
+BUTTSFunction(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0))))))
+BUTTSFunction(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0))))))
+Value: N(24.0)
+[32m- should evaluate recursive JavaScripty programs according to the lab spec[0m
+[32msubstitute/no-shadow[0m
+[32m- should substitute a value for uses of a variable[0m
+[32msubstitute/shadow[0m
+XXXUnary(Neg,Unary(Neg,N(1.0)))XXX
+[31m- should substitute a value for uses of a variable *** FAILED ***[0m
+[31m  Expected Function(Some(x),y,Binary(Plus,Var(x),Var(y))), but got Function(Some(x),y,Binary(Plus,N(3.0),Var(y))) (Lab3Grading.scala:116)[0m
+[32mstep[0m
+[31m- should perform one step of evaluation according to the lab spec *** FAILED ***[0m
+[31m  jsy.lab3.ast$DynamicTypeError:[0m
+[31m  at Lab3$.step(Lab3.scala:328)[0m
+[31m  at Lab3Grading.assertRefStep(Lab3Grading.scala:15)[0m
+[31m  at Lab3Grading$$anonfun$9$$anonfun$apply$mcV$sp$10.apply(Lab3Grading.scala:138)[0m
+[31m  at Lab3Grading$$anonfun$9$$anonfun$apply$mcV$sp$10.apply(Lab3Grading.scala:121)[0m
+[31m  at scala.collection.immutable.List.foreach(List.scala:318)[0m
+[31m  at Lab3Grading$$anonfun$9.apply$mcV$sp(Lab3Grading.scala:121)[0m
+[31m  at Lab3Grading$$anonfun$9.apply(Lab3Grading.scala:121)[0m
+[31m  at Lab3Grading$$anonfun$9.apply(Lab3Grading.scala:121)[0m
+[31m  at org.scalatest.Transformer$$anonfun$apply$1.apply(Transformer.scala:22)[0m
+[31m  at org.scalatest.Transformer$$anonfun$apply$1.apply(Transformer.scala:22)[0m
+[31m  ...[0m
+[32mstep/fun-equality[0m
+------------------------------------------------------------
+Evaluating with step ...
+Step 0: Binary(Eq,Function(None,x,N(0.0)),N(0.0))
+XXXBinary(Eq,Function(None,x,N(0.0)),N(0.0))XXX
+------------------------------------------------------------
+Evaluating with step ...
+Step 0: Binary(Eq,N(0.0),Function(None,x,N(0.0)))
+XXXBinary(Eq,N(0.0),Function(None,x,N(0.0)))XXX
+------------------------------------------------------------
+Evaluating with step ...
+Step 0: Binary(Ne,Function(None,x,N(0.0)),N(0.0))
+XXXBinary(Ne,Function(None,x,N(0.0)),N(0.0))XXX
+------------------------------------------------------------
+Evaluating with step ...
+Step 0: Binary(Ne,N(0.0),Function(None,x,N(0.0)))
+XXXBinary(Ne,N(0.0),Function(None,x,N(0.0)))XXX
+[32m- should yield a dynamic type error[0m
+[32mstep/call-non-fun[0m
+------------------------------------------------------------
+Evaluating with step ...
+Step 0: Call(N(3.0),N(4.0))
+XXXCall(N(3.0),N(4.0))XXX
+------------------------------------------------------------
+Evaluating with step ...
+Step 0: Call(N(3.0),B(true))
+XXXCall(N(3.0),B(true))XXX
+------------------------------------------------------------
+Evaluating with step ...
+Step 0: Call(Binary(Minus,Binary(Plus,Binary(Plus,N(10.0),N(4.0)),N(7.0)),Binary(Times,B(true),N(3.0))),B(true))
+XXXCall(Binary(Minus,Binary(Plus,Binary(Plus,N(10.0),N(4.0)),N(7.0)),Binary(Times,B(true),N(3.0))),B(true))XXX
+------------------------------------------------------------
+Evaluating with step ...
+Step 0: Call(Call(Function(None,x,N(0.0)),N(10.0)),B(true))
+XXXCall(Call(Function(None,x,N(0.0)),N(10.0)),B(true))XXX
+[32m- should yield a dynamic type error[0m
+[32mstep/simple-programs[0m
+------------------------------------------------------------
+Evaluating with step ...
+Step 0: ConstDecl(w,Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Call(Var(w),N(3.0)))
+XXXConstDecl(w,Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Call(Var(w),N(3.0)))XXX
+Step 1: Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),N(3.0))
+XXXCall(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),N(3.0))XXX
+Step 2: If(Binary(Eq,N(3.0),N(0.0)),N(0.1),Binary(Plus,N(3.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Binary(Minus,N(3.0),N(1.0)))))
+XXXIf(Binary(Eq,N(3.0),N(0.0)),N(0.1),Binary(Plus,N(3.0),Call(Function(Some(w),y,If(Binary(Eq,Var(y),N(0.0)),N(0.1),Binary(Plus,Var(y),Call(Var(w),Binary(Minus,Var(y),N(1.0)))))),Binary(Minus,N(3.0),N(1.0)))))XXX
+[31m- should evaluate JavaScripty programs according to the lab spec *** FAILED ***[0m
+[31m  jsy.lab3.ast$DynamicTypeError:[0m
+[31m  at Lab3$.step(Lab3.scala:328)[0m
+[31m  at Lab3$.loop$1(Lab3.scala:361)[0m
+[31m  at Lab3$.iterateStep(Lab3.scala:367)[0m
+[31m  at Lab3Grading.assertRefIterateStep(Lab3Grading.scala:20)[0m
+[31m  at Lab3Grading$$anonfun$12.apply$mcV$sp(Lab3Grading.scala:165)[0m
+[31m  at Lab3Grading$$anonfun$12.apply(Lab3Grading.scala:164)[0m
+[31m  at Lab3Grading$$anonfun$12.apply(Lab3Grading.scala:164)[0m
+[31m  at org.scalatest.Transformer$$anonfun$apply$1.apply(Transformer.scala:22)[0m
+[31m  at org.scalatest.Transformer$$anonfun$apply$1.apply(Transformer.scala:22)[0m
+[31m  at org.scalatest.OutcomeOf$class.outcomeOf(OutcomeOf.scala:85)[0m
+[31m  ...[0m
+[32mstep/recursive-programs[0m
+------------------------------------------------------------
+Evaluating with step ...
+Step 0: ConstDecl(factorial,Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Call(Var(factorial),N(3.0)))
+XXXConstDecl(factorial,Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Call(Var(factorial),N(3.0)))XXX
+Step 1: Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),N(3.0))
+XXXCall(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),N(3.0))XXX
+Step 2: If(Binary(Eq,N(3.0),N(0.0)),N(1.0),Binary(Times,N(3.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(3.0),N(1.0)))))
+XXXIf(Binary(Eq,N(3.0),N(0.0)),N(1.0),Binary(Times,N(3.0),Call(Function(Some(f),n,If(Binary(Eq,Var(n),N(0.0)),N(1.0),Binary(Times,Var(n),Call(Var(f),Binary(Minus,Var(n),N(1.0)))))),Binary(Minus,N(3.0),N(1.0)))))XXX
+[31m- should evaluate recursive JavaScripty programs according to the lab spec *** FAILED ***[0m
+[31m  jsy.lab3.ast$DynamicTypeError:[0m
+[31m  at Lab3$.step(Lab3.scala:328)[0m
+[31m  at Lab3$.loop$1(Lab3.scala:361)[0m
+[31m  at Lab3$.iterateStep(Lab3.scala:367)[0m
+[31m  at Lab3Grading.assertRefIterateStep(Lab3Grading.scala:20)[0m
+[31m  at Lab3Grading$$anonfun$13.apply$mcV$sp(Lab3Grading.scala:194)[0m
+[31m  at Lab3Grading$$anonfun$13.apply(Lab3Grading.scala:193)[0m
+[31m  at Lab3Grading$$anonfun$13.apply(Lab3Grading.scala:193)[0m
+[31m  at org.scalatest.Transformer$$anonfun$apply$1.apply(Transformer.scala:22)[0m
+[31m  at org.scalatest.Transformer$$anonfun$apply$1.apply(Transformer.scala:22)[0m
+[31m  at org.scalatest.OutcomeOf$class.outcomeOf(OutcomeOf.scala:85)[0m
+[31m  ...[0m
+[36mRun completed in 570 milliseconds.[0m
+[36mTotal number of tests run: 13[0m
+[36mSuites: completed 1, aborted 0[0m
+[36mTests: succeeded 9, failed 4, canceled 0, ignored 0, pending 0[0m
+[31m*** 4 TESTS FAILED ***[0m
+[0m[[32msuccess[0m] [0mTotal time: 10 s, completed Feb 20, 2014 10:18:44 AM[0m
