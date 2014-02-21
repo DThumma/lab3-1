@@ -203,7 +203,7 @@ object Lab3 extends jsy.util.JsyApplication {
       case N(_) | B(_) | Undefined | S(_) => e
       //if e is a function and contains the string x, return it
       //otherwise substitute into the function
-      case Function(p, s, e1) => if((x == p) || (x ==s)) return e else return Function(p,s, substitute(e1, v, x))
+      case Function(p, s, e1) => if((Some(x) == p) || (x ==s)) return e else return Function(p,s, substitute(e1, v, x))
       case Binary(op, e1, e2) => op match{
         case (Eq|Ne) => e1 match {
           case Function(x,y,z) => throw new DynamicTypeError(e)
@@ -224,18 +224,20 @@ object Lab3 extends jsy.util.JsyApplication {
     
   def step(e: Expr): Expr = {
     println("XXX"+e+"XXX")
+    
     e match {
       /* Base Cases: Do Rules */
       case Print(e1) if isValue(e1) => println(pretty(e1)); Undefined
+      case Print(e1) => Print(step(e1))
         // ****** Your cases here
       //Unary
       case Unary(op, e1) if (isValue(e1)) => op match{
 		case Neg => return N( - toNumber(e1))
 		case Not => return B( ! toBoolean(e1))
 	  }
+      case Unary(op, e1) => Unary(op, step(e1))
 	  //Binary
 	  case Binary(op, e1, e2) if (isValue(e1) && isValue(e2)) => op match{
-	  	case Seq => e2 
 	  	case Plus => (e1, e2) match {
 			//first argument string
 			case(S(s1),e2) => return S(s1 + toStr(e2))
@@ -264,95 +266,68 @@ object Lab3 extends jsy.util.JsyApplication {
 		}
 
 		case Lt => (e1, e2) match { // >
+		  case(S(s1), S(s2)) => B( s1 < s2 )
 			case(S(s1),e2) => B( toNumber(e1) < toNumber(e2) )
 			case(e1, S(s2)) => B( toNumber(e1) < toNumber(e2) )
-			case(S(s1), S(s2)) => B( s1 < s2 )
+			
 			case (_,_) => B( toNumber(e1) < toNumber(e2) )
 			}
 		case Gt => (e1, e2) match { // >
+			case(S(s1), S(s2)) => B( s1 > s2 )
 			case(S(s1),e2) => B( toNumber(e1) > toNumber(e2) )
 			case(e1, S(s2)) => B( toNumber(e1) > toNumber(e2) )
-			case(S(s1), S(s2)) => B( s1 > s2 )
+			
 			case (_,_) => B( toNumber(e1) > toNumber(e2) )
 			}
 		case Le => (e1, e2) match { // <=
+		  case(S(s1), S(s2)) => B( s1 <= s2 )
 			case(S(s1),e2) => B( toNumber(e1) <= toNumber(e2) )
 			case(e1, S(s2)) => B( toNumber(e1) <= toNumber(e2) )
-			case(S(s1), S(s2)) => B( s1 <= s2 )
+			
 			case (_,_) => B( toNumber(e1) <= toNumber(e2) )
 			}
 
 		case Ge => (e1, e2) match { // >=
+		  case(S(s1), S(s2)) => B( s1 >= s2 )
 			case(S(s1),e2) => B( toNumber(e1) >= toNumber(e2) )
 			case(e1, S(s2)) => B( toNumber(e1) >= toNumber(e2) )
-			case(S(s1), S(s2)) => B( s1 >= s2 )
+			
 			case (_,_) => B( toNumber(e1) >= toNumber(e2) )
 			}
-		//if first argument true return second argument else return false
-		case And if (isValue(e1)) => if (toBoolean(e1)) return e2 else return B(false)
+		case And  => if (toBoolean(e1)) return e2 else return e1
 		//if first argument true return true else return second argument
-		case Or if (isValue(e1)) => if (toBoolean(e1)) return B(true) else return e2
+		case Or  => if (toBoolean(e1)) return e1 else return e2
 	  }
+	  //case Binary(Seq, e1, e2) if (isValue(e1)) => e2
+	  case Binary(op, e1, e2) if (isValue(e1)) =>  op match {
+	    case Seq => e2
+	    //if first argument true return second argument else return false
+		case And  => if (toBoolean(e1)) return e2 else return e1
+		//if first argument true return true else return second argument
+		case Or  => if (toBoolean(e1)) return e1 else return e2
+	    case _ => Binary(op, e1, step(e2))
+	  }
+      case Binary(op, e1, e2) => Binary(op, step(e1), e2)
 	  
 	  case If(e1, e2, e3) if (isValue(e1)) => {println("IFSTEP"); if (toBoolean(e1)) return e2 else return e3}
+	  case If(e1, e2, e3) => If(step(e1), e2, e3)
+	  
 	  case ConstDecl(x, e1, e2) if (isValue(e1)) => return substitute(e2, e1, x)
-        case Call(e1, e2) if ((isValue(e1) && isValue(e2))) => e1 match {
+	  case ConstDecl(x, e1, e2) => return ConstDecl(x, step(e1), e2)
+      case Call(e1, e2) if ((isValue(e1) && isValue(e2))) => e1 match {
         case Function(Some(p), x, e3 ) => return substitute(substitute(e3, e1, p),e2,x);
         case Function(None, x, e3 ) => return substitute(e3, e2, x)
         case _ => throw new DynamicTypeError(e);
-        }
+      }
+      
+      case Call(v1, e2) if(isValue(v1)) => v1 match {
+        case Function(x, y, z) => Call(v1, step(e2))
+        case _ => throw new DynamicTypeError(e)
+      }
+      
+      case Call(e1, e2) => Call(step(e1), e2)
 
             
-      
-       
-      
-      /* Inductive Cases: Search Rules */
-      case Print(e1) => Print(step(e1))
-      
-      //SearchUnary
-      case Unary(uop, e1) => Unary(uop, step(e1))
-
-      //Binary Cases with the First as a Value
-      case Binary(bop, v1, e2) if (isValue(v1)) => (bop: @unchecked, v1, e2) match {
-        //TypeErrorEquality1 & Factors in SearchEquality2
-        case (bop @ (Eq | Ne), Function(_,_,_), e2) => throw new DynamicTypeError(e)
-        
-        //SearchBinaryArith2 & SearchEquality2
-        case (bop, v1, e2) => Binary(bop, v1, step(e2))
-      }
-      
-      //Binary Cases with Both as Expressions
-      case Binary(bop, e1, e2) => (bop: @unchecked, e1, e2) match {
-    	//TypeErrorEquality1  
-      	case (bop @ (Eq | Ne), e1, Function(_,_,_)) => throw new DynamicTypeError(e)
-        
-        //SearchBinary1
-        case (bop, e1, e2) => Binary(bop, step(e1), e2)
-      }
-
-      //SearchIf
-      case If(e1, e2, e3) => if(toBoolean(step(e1))) e2 else e3
-      
-      //SearchConst
-      case ConstDecl(x, e1, e2) => ConstDecl(x, step(e1), e2)
-      
-      //SearchCall Cases
-      case Call(e1, e2) => (e1, e2) match {
-    	//SearchCall2 Cases; with and without function name
-      	case (Function(None, x, eprime), e2) => Call(Function(None, x, eprime), step(e2))
-    	case (Function(Some(f), x, eprime), e2) => Call(Function(Some(f), x, eprime), step(e2))
-    	
-    	//TypeErrorCall -> if e1 is Value and not a Function error
-    	case (e1, e2) if (isValue(e1))=> throw new DynamicTypeError(e)
-    	
-    	//SearchCall1
-    	case (e1, e2) => Call(step(e1), e2)
-      }
-      
-      
-      
-      
-        // ****** Your cases here
       
       /* Cases that should never match. Your cases above should ensure this. */
       case Var(_) => throw new AssertionError("Gremlins: internal error, not closed expression.")

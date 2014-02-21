@@ -926,3 +926,4 @@ Value: S(aaa)
 [36mTests: succeeded 11, failed 2, canceled 0, ignored 0, pending 0[0m
 [31m*** 2 TESTS FAILED ***[0m
 [0m[[32msuccess[0m] [0mTotal time: 10 s, completed Feb 20, 2014 10:50:42 AM[0m
+Loading /usr/share/sbt/bin/sbt-launch-lib.bash

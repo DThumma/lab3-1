@@ -16,26 +16,18 @@
 [0m[[0minfo[0m] [0mCompiling 1 Scala source to /home/samuel/Documents/pl/CSCI-3155/lab3/target/scala-2.10/classes...[0m
 [0m[[0mdebug[0m] [0mGetting compiler-interface from component compiler for Scala 2.10.3[0m
 [0m[[0mdebug[0m] [0mGetting compiler-interface from component compiler for Scala 2.10.3[0m
-[0m[[0mdebug[0m] [0mRunning cached compiler 1d7682a5, interfacing (CompilerInterface) with Scala compiler version 2.10.3[0m
+[0m[[0mdebug[0m] [0mRunning cached compiler 3ad397b4, interfacing (CompilerInterface) with Scala compiler version 2.10.3[0m
 [0m[[0mdebug[0m] [0mCalling Scala compiler with arguments  (CompilerInterface):[0m
 [0m[[0mdebug[0m] [0m	-bootclasspath[0m
 [0m[[0mdebug[0m] [0m	/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/resources.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rt.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/sunrsasign.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jsse.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jce.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/charsets.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/netx.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/plugin.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rhino.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jfr.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/classes:/home/samuel/.sbt/boot/scala-2.10.3/lib/scala-library.jar[0m
 [0m[[0mdebug[0m] [0m	-classpath[0m
 [0m[[0mdebug[0m] [0m	/home/samuel/Documents/pl/CSCI-3155/lab3/target/scala-2.10/classes:/home/samuel/Documents/pl/CSCI-3155/lab3/lib/scalatest_2.10-2.0.jar:/home/samuel/Documents/pl/CSCI-3155/lab3/lib/liblab3.jar[0m
-[0m[[33mwarn[0m] [0m/home/samuel/Documents/pl/CSCI-3155/lab3/src/main/scala/Lab3.scala:269: unreachable code[0m
-[0m[[33mwarn[0m] [0m			case(S(s1), S(s2)) => B( s1 < s2 )[0m
-[0m[[33mwarn[0m] [0m			                       ^[0m
-[0m[[33mwarn[0m] [0m/home/samuel/Documents/pl/CSCI-3155/lab3/src/main/scala/Lab3.scala:275: unreachable code[0m
-[0m[[33mwarn[0m] [0m			case(S(s1), S(s2)) => B( s1 > s2 )[0m
-[0m[[33mwarn[0m] [0m			                       ^[0m
-[0m[[33mwarn[0m] [0m/home/samuel/Documents/pl/CSCI-3155/lab3/src/main/scala/Lab3.scala:281: unreachable code[0m
-[0m[[33mwarn[0m] [0m			case(S(s1), S(s2)) => B( s1 <= s2 )[0m
-[0m[[33mwarn[0m] [0m			                       ^[0m
-[0m[[33mwarn[0m] [0m/home/samuel/Documents/pl/CSCI-3155/lab3/src/main/scala/Lab3.scala:288: unreachable code[0m
-[0m[[33mwarn[0m] [0m			case(S(s1), S(s2)) => B( s1 >= s2 )[0m
-[0m[[33mwarn[0m] [0m			                       ^[0m
-[0m[[33mwarn[0m] [0mfour warnings found[0m
-[0m[[0mdebug[0m] [0mScala compilation took 8.429332173 s[0m
+[0m[[33mwarn[0m] [0m/home/samuel/Documents/pl/CSCI-3155/lab3/src/main/scala/Lab3.scala:240: match may not be exhaustive.[0m
+[0m[[33mwarn[0m] [0mIt would fail on the following input: Seq[0m
+[0m[[33mwarn[0m] [0m	  case Binary(op, e1, e2) if (isValue(e1) && isValue(e2)) => op match{[0m
+[0m[[33mwarn[0m] [0m	                                                             ^[0m
+[0m[[33mwarn[0m] [0mone warning found[0m
+[0m[[0mdebug[0m] [0mScala compilation took 8.344211215 s[0m
 [0m[[0mdebug[0m] [0mInvalidated by transitive public inheritance: Set()[0m
 [0m[[0mdebug[0m] [0mInvalidated by direct dependency: Set()[0m
 [0m[[0mdebug[0m] [0mNew invalidations:[0m
